@@ -30,6 +30,8 @@
     <taglibs-standard-impl.version>1.2.5</taglibs-standard-impl.version>
     <encoder.version>1.2</encoder.version>
     <taglibs-standard.version>1.2.5</taglibs-standard.version>
+    <jakarta-servlet-api.version>6.0.0</jakarta-servlet-api.version>
+    <jakarta-jsp-api.version>3.1.0</jakarta-jsp-api.version>
     <servlet-api.version>2.5</servlet-api.version>
     <jsp-api.version>2.1</jsp-api.version>
   </properties>
@@ -93,6 +95,19 @@
         </exclusions>
       </dependency>
       <!-- external -->
+      <dependency>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+        <version>${jakarta-servlet-api.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.servlet.jsp</groupId>
+        <artifactId>jakarta.servlet.jsp-api</artifactId>
+        <version>${jakarta-jsp-api.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <!-- Legacy servlet API for JSP compatibility -->
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>servlet-api</artifactId>

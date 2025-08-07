@@ -176,4 +176,9 @@ public class ProxyServletContext implements ServletContext {
     c.setAttribute(arg0, arg1);
   }
 
+  // Add missing method for newer servlet API versions
+  public void setResponseCharacterEncoding(String encoding) {
+    // No-op implementation for compatibility - this method is not available in older javax.servlet versions
+  }
+
 }

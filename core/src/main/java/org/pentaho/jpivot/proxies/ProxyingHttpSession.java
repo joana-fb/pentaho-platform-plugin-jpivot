@@ -17,9 +17,7 @@ import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
 
-@SuppressWarnings({ "deprecation", "rawtypes" })
 public class ProxyingHttpSession implements HttpSession {
   HttpSession s;
 
@@ -34,7 +32,7 @@ public class ProxyingHttpSession implements HttpSession {
   }
 
   @Override
-  public Enumeration getAttributeNames() {
+  public Enumeration<String> getAttributeNames() {
     return s.getAttributeNames();
   }
 
@@ -60,22 +58,7 @@ public class ProxyingHttpSession implements HttpSession {
 
   @Override
   public ServletContext getServletContext() {
-    return new ProxyServletContext(s.getServletContext());
-  }
-
-  @Override
-  public HttpSessionContext getSessionContext() {
-    return s.getSessionContext();
-  }
-
-  @Override
-  public Object getValue(String arg0) {
-    return s.getValue(arg0);
-  }
-
-  @Override
-  public String[] getValueNames() {
-    return s.getValueNames();
+    return s.getServletContext();
   }
 
   @Override
@@ -89,18 +72,8 @@ public class ProxyingHttpSession implements HttpSession {
   }
 
   @Override
-  public void putValue(String arg0, Object arg1) {
-    s.putValue(arg0, arg1);
-  }
-
-  @Override
   public void removeAttribute(String arg0) {
     s.removeAttribute(arg0);
-  }
-
-  @Override
-  public void removeValue(String arg0) {
-    s.removeValue(arg0);
   }
 
   @Override
@@ -111,6 +84,37 @@ public class ProxyingHttpSession implements HttpSession {
   @Override
   public void setMaxInactiveInterval(int arg0) {
     s.setMaxInactiveInterval(arg0);
+  }
+
+  // Deprecated methods required by javax.servlet.http.HttpSession
+  @Override
+  @Deprecated
+  public String[] getValueNames() {
+    return s.getValueNames();
+  }
+
+  @Override
+  @Deprecated
+  public Object getValue(String name) {
+    return s.getValue(name);
+  }
+
+  @Override
+  @Deprecated
+  public void putValue(String name, Object value) {
+    s.putValue(name, value);
+  }
+
+  @Override
+  @Deprecated
+  public void removeValue(String name) {
+    s.removeValue(name);
+  }
+
+  @Override
+  @Deprecated
+  public javax.servlet.http.HttpSessionContext getSessionContext() {
+    return s.getSessionContext();
   }
 
 }

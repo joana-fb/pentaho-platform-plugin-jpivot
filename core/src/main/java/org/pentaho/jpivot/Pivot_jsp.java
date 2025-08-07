@@ -52,6 +52,7 @@ import org.pentaho.platform.util.messages.LocaleHelper;
 import org.pentaho.platform.util.web.SimpleUrlFactory;
 import org.pentaho.platform.web.http.request.HttpRequestParameterProvider;
 import org.pentaho.platform.web.http.session.HttpSessionParameterProvider;
+import org.pentaho.jpivot.util.ServletAdapterUtil;
 import org.pentaho.platform.web.jsp.messages.Messages;
 
 import com.tonbeller.jpivot.chart.ChartComponent;
@@ -93,7 +94,7 @@ public final class Pivot_jsp extends org.apache.jasper.runtime.HttpJspBase {
     solutionEngine.init( userSession );
     IRuntimeContext context = null;
     ArrayList messages = new ArrayList();
-    HttpRequestParameterProvider requestParameters = new HttpRequestParameterProvider( request );
+    HttpRequestParameterProvider requestParameters = ServletAdapterUtil.createRequestParameterProvider( request );
     HttpSessionParameterProvider sessionParameters = new HttpSessionParameterProvider( userSession );
     HashMap parameterProviders = new HashMap();
     requestParameters.setParameter( PivotViewComponent.MODE, PivotViewComponent.EXECUTE ); //$NON-NLS-1$ //$NON-NLS-2$
@@ -551,7 +552,7 @@ public final class Pivot_jsp extends org.apache.jasper.runtime.HttpJspBase {
             IRuntimeContext context = null;
             try {
               if ( newAction != null ) {
-                context = new AnalysisViewService().getNewAnalysisViewRuntime( request, userSession );
+                context = new AnalysisViewService().getNewAnalysisViewRuntime( ServletAdapterUtil.createJakartaRequest( request ), userSession );
               } else {
                 context = getRuntimeForQuery( actionPath + "/" + actionName, request, userSession );
               }
